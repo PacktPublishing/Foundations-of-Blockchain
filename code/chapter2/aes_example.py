@@ -1,8 +1,10 @@
+#!/usr/bin/python
+
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 
 # Encryption part
-with open("ees.key", "wb") as file_out:
+with open("aes.key", "wb") as file_out:
     key = get_random_bytes(16)
     file_out.write(key)
 data = "plaintext for AES"
@@ -14,7 +16,7 @@ print("Data is encrypted and stored in a file")
 
 
 # Decryption part
-with open("ees.key", "rb") as file_in:
+with open("aes.key", "rb") as file_in:
     key = file_in.read(16)
 with open("encrypted.bin", "rb") as file_in:
     nonce, tag, cipher_text = [file_in.read(x) for x in (16, 16, -1)]
