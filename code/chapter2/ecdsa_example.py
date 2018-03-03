@@ -11,7 +11,7 @@ with open('ecc.pem', 'wt') as f:
     f.write(key.export_key(format='PEM'))
 
 # creation digital signature
-message = b'I give my permission to order #4355'
+message = b'ECDSA message for signature'
 key = ECC.import_key(open('ecc.pem').read())
 h = SHA256.new(message)
 signer = DSS.new(key, 'fips-186-3')
