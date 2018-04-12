@@ -1,1 +1,1 @@
-pycryptodome==3.4.11
+sanic==0.7.0
