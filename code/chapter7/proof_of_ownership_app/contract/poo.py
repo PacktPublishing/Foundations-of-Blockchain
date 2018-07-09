@@ -1,3 +1,19 @@
+"""
+Invoking the smart contract:
+
+testinvoke 0x60a7ed582c6885addf1f9bec7e413d01abe54f1a register ["f572f8ce40
+bf97b56bad1c6f8d62552b8b066039a9835f294ea4826629278df3","AK2nJJpJr6o664CWJKi1QRXj
+qeic2zRp8y"]
+
+testinvoke 0x60a7ed582c6885addf1f9bec7e413d01abe54f1a transfer ["f572f8ce40
+bf97b56bad1c6f8d62552b8b066039a9835f294ea4826629278df3","AZ81H31DMWzbSnFDLFkzh9v
+HwaDLayV7fU"]
+
+testinvoke 0x60a7ed582c6885addf1f9bec7e413d01abe54f1a query ["f572f8ce40
+bf97b56bad1c6f8d62552b8b066039a9835f294ea4826629278df3"]
+
+"""
+
 from boa.interop.Neo.Runtime import Log, Notify
 from boa.interop.Neo.Storage import Get, Put, GetContext
 from boa.interop.Neo.Runtime import GetTrigger,CheckWitness
