@@ -23,7 +23,7 @@ class Blockchain(object):
     def __init__(self):
 
         self._chain = [self.get_genesis_block()]
-        self.timestamp = datetime.now().strftime("%s")
+        self.timestamp = 1521059029
 
     @property
     def chain(self):
@@ -77,8 +77,12 @@ class Blockchain(object):
         hash_object = SHA256.new(data=(str(index) + previous_hash + str(timestamp) + data).encode())
         return hash_object.hexdigest()
 
-
 new_chain = Blockchain()
+new_chain.add_block(data="first block data")
+new_chain.add_block(data="second block data")
+new_chain.add_block(data="third block data")
+print(json.dumps(new_chain.chain))
+new_chain.reset()
 new_chain.add_block(data="modified first block data")
 new_chain.add_block(data="second block data")
 new_chain.add_block(data="third block data")
