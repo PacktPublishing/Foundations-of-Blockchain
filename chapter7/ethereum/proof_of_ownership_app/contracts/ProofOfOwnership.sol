@@ -11,7 +11,8 @@ contract ProofOfOwnership {
 
     function registerAsset(bytes32 asset) public {
 
-        assetOwners[asset] = msg.sender;
+            assetOwners[asset] = msg.sender;
+
   }
 
     function transferAsset(bytes32 asset, address owner) public {

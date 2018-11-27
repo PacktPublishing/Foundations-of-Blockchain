@@ -1,21 +1,28 @@
 {
-  "name": "poo_fe",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bignumber.js": "^7.2.1",
-    "ganache-cli": "^6.1.8",
+    "bignumber.js": "^8.0.1",
+    "rc-progress": "^2.2.6",
+    "react-bootstrap": "^0.32.4",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.5",
-    "reactjs-popup": "^1.2.0",
-    "truffle-contract": "^3.0.6",
-    "web3": "^0.20.6"
+    "react-dropzone": "^7.0.1",
+    "react-scripts": "1.1.4",
+    "truffle-contract": "^4.0.0-next.0",
+    "web3": "^1.0.0-beta.35"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "link-contracts": "run-script-os",
+    "link-contracts:linux:darwin": "cd src && ln -s ../../build/contracts contracts",
+    "link-contracts:win32": "cd src && mklink \\D contracts ..\\..\\build\\contracts"
+  },
+  "devDependencies": {
+    "run-script-os": "^1.0.3"
   }
 }
