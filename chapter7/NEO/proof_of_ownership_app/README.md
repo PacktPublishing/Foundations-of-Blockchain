@@ -1,10 +1,13 @@
+
+# Proof of Ownership DApp
+
 ## Building the smart contract
 
 `build poo.py test 0710 05 True False query ["f572f8ce40bf97b56bad1c6f8d62552b8b066039a9835f294ea4826629278df3"] `
 
 ## Importing the smart contract
 
-`import poo.avm 0710 05 True False `
+`import contract poo.avm 0710 05 True False`
 
 ## Invoking the smart contract
 
@@ -24,3 +27,18 @@ HwaDLayV7fU"]`
 
     `testinvoke 0x60a7ed582c6885addf1f9bec7e413d01abe54f1a query ["f572f8ce40
 bf97b56bad1c6f8d62552b8b066039a9835f294ea4826629278df3"]`
+
+## Launching the client
+
+* Navigate to `interface` directory
+
+    `cd interface` 
+
+* Installing dependencies
+
+    `yarn install`
+    
+* Running the application
+
+    `yarn start`
+ 
