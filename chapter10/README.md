@@ -1,4 +1,5 @@
-# Chapter 10
+# Chapter 10, Blockchain Security
+This chapter gives an insight on the level of security in the blockchain technology by pointing out the possible attacks in the blockchain network and how they can be prevented
 
 ## Double spend attack
 
