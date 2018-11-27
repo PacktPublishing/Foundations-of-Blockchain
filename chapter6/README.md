@@ -1,4 +1,5 @@
-# Chapter 5
+# Chapter 6, Diving into Blockchain: Proof of Existence
+This chapter introduces the decentralized application development using MultiChain blockchain framework by implementing a use case — Proof of Existence.
 
 Scripts present here could be used to create and deploy web server to create a REST API.
  Full project with front end integration could be found [here](https://github.com/koshikraj/proof-of-existence).
@@ -9,9 +10,31 @@ Scripts present here could be used to create and deploy web server to create a R
 
 - Installation
 
-    Follow the installation instruction for Mac/Windows/Linux
+    * Change directory to tmp folder: 
+    
+        `cd /tmp` 
+    
+    * Download the MultiChain bundle: 
+    
+        ```
+        wget https://www.multichain.com/download/multichain-1.0.6.tar.gz
+        ```    
+    * Exctract the tar file: 
+    
+        ```
+        tar -xvzf multichain-1.0.6.tar.gz 
+        ```
+    * Change directory to the extracted folder: 
+    
+        `cd multichain-1.0.6` 
+    
+    * Move few files to `/usr/local/bin`: 
+    
+        ```
+        mv multichaind multichain-cli multichain-util /usr/local/bin
+        ``` 
 
-    www.multichain.com/download-install/
+    More installation instructions for Mac/Windows/Linux can be found at: www.multichain.com/download-install/
     
 - Create a chain
     
