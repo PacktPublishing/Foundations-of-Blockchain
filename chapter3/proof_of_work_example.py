@@ -29,7 +29,7 @@ class Blockchain(object):
     def __init__(self):
 
         self._chain = [self.get_genesis_block()]
-        self.timestamp = datetime.now().strftime("%s")
+        self.timestamp = int(datetime.now().timestamp())
         self.difficulty_bits = 0
 
     @property

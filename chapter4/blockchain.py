@@ -46,7 +46,7 @@ class Blockchain(object):
 
         previous_block = self.get_latest_block()
         next_index = previous_block.index + 1
-        next_timestamp = datetime.now().strftime("%s")
+        next_timestamp = int(datetime.now().timestamp())
         next_hash = self.calculate_hash(next_index, previous_block.hash, next_timestamp, block_data)
         return Block(next_index, previous_block.hash, next_timestamp, block_data, next_hash)
 
