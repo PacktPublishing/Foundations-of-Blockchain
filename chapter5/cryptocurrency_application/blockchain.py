@@ -2,7 +2,7 @@ from Crypto.Hash import SHA256
 from datetime import datetime
 
 from utils.logger import logger
-from transaction import get_coinbase_transaction, is_valid_address, process_transactions, Transaction, UnspentTxOut, TxIn, TxOut
+from transaction import get_coinbase_transaction, is_valid_address, process_transactions, transaction_object, Transaction, UnspentTxOut, TxIn, TxOut
 from transaction_pool import add_to_transaction_pool, get_transaction_pool, update_transaction_pool
 from wallet import create_transaction, find_unspent_tx_outs, get_balance, get_private_from_wallet, get_public_from_wallet
 
@@ -35,6 +35,7 @@ class Blockchain(object):
 
     def __init__(self):
 
+        self.genesis_transaction = Transaction([TxIn('', 0, '')], [TxOut(get_public_from_wallet(), 50)])
         self._blockchain = [self.get_genesis_block()]
         self.difficulty_bits = 15
         self.unspent_tx_outs = process_transactions([self.genesis_transaction], [], 0)
@@ -55,22 +56,12 @@ class Blockchain(object):
     def blocks(self, blocks):
         self._blockchain = blocks
 
-    # genesis_transaction = {'tx_ins': [{'signature': '', 'tx_out_id': '', 'tx_out_index': 0}],
-    #     'tx_outs': [{
-    #         'address': getPublicFromWallet(),
-    #         'amount': 50
-    #     }]
-        # 'id': 'e655f6a5f26dc9b4cac6e46f52336428287759cf81ef5ff10854f69d68f43fa3'
-    # }
 
-    genesis_transaction = Transaction([TxIn('', 0, '')], [TxOut(get_public_from_wallet(), 50)])
-
-    @classmethod
-    def get_genesis_block(cls):
+    def get_genesis_block(self):
 
         # SHA256.new(data=(str(0) + "0"+ str(1465154705) +"my genesis block!!").encode()).hexdigest()
 
-        return Block(0, "0", 1465154705, cls.genesis_transaction, 0, 0,
+        return Block(0, "0", 1465154705, self.genesis_transaction, 0, 0,
                      "816534932c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7")
 
     def generate_next_block(self, block_data):
@@ -113,6 +104,7 @@ class Blockchain(object):
         return self.generate_next_block(block_data)
 
     def get_account_balance(self):
+        print(self.get_unspent_tx_outs())
         return get_balance(get_public_from_wallet(), self.get_unspent_tx_outs())
 
     def send_transaction(self, address, amount):
@@ -135,12 +127,16 @@ class Blockchain(object):
 
     def calculate_hash(self, index, previous_hash, timestamp, data, nonce=None):
 
+        # Calculating the transaction summary similar to a Merkle root
+        transactions = data if isinstance(data, list) else [data]
+        transactions_summary = [transaction_object(transaction).id for transaction in transactions]
+
         if not nonce:
-            header = str(index) + previous_hash + str(timestamp) + str(data) + str(self.difficulty_bits)
+            header = str(index) + previous_hash + str(timestamp) + str(transactions_summary) + str(self.difficulty_bits)
             return self.proof_of_work(header)
         else:
             hash_object = SHA256.new(data=(str(index) + previous_hash + str(timestamp)
-                                           + str(data) + str(self.difficulty_bits) + str(nonce)).encode())
+                                           + str(transactions_summary) + str(self.difficulty_bits) + str(nonce)).encode())
             return hash_object.hexdigest()
 
     def proof_of_work(self, header):
@@ -163,7 +159,10 @@ class Blockchain(object):
     def add_block(self, new_block):
 
         if self.is_valid_new_block(new_block, self.get_latest_block()):
-            ret_val = process_transactions(new_block.data, self.get_unspent_tx_outs(), new_block.index)
+
+            transactions = new_block.data if isinstance(new_block.data, list) else [new_block.data]
+            ret_val = process_transactions([transaction_object(transaction) for transaction in transactions], self.get_unspent_tx_outs(), new_block.index)
+
             if ret_val is None:
                 print('block is not valid in terms of transactions')
                 return False
@@ -193,10 +192,17 @@ class Blockchain(object):
         # if self.calculate_hash_for_block(Block(**blockchain_to_validate[0])) != self.get_genesis_block().hash:
         #     return False
 
-        temp_blocks = [Block(**blockchain_to_validate[0])]
-        for currentBlock in blockchain_to_validate[1:]:
-            if self.is_valid_new_block(Block(**currentBlock), temp_blocks[-1]):
-                temp_blocks.append(Block(**currentBlock))
-            else:
+        previous_block = None
+        unspent_tx_outs = []
+        for current_block in blockchain_to_validate:
+            if previous_block and not self.is_valid_new_block(Block(**current_block), previous_block):
                 return False
-        return True
+            current_block = (Block(**current_block))
+            transactions = current_block.data if isinstance(current_block.data, list) else [current_block.data]
+            unspent_tx_outs = process_transactions([transaction_object(transaction) for transaction in transactions], unspent_tx_outs, current_block.index)
+            previous_block = current_block
+
+            if not unspent_tx_outs:
+                return False
+
+        return unspent_tx_outs

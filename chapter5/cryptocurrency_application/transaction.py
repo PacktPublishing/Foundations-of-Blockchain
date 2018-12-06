@@ -33,11 +33,23 @@ class TxOut:
 
 class Transaction:
 
-    def __init__(self, tx_ins, tx_outs):
+    def __init__(self, tx_ins, tx_outs, tx_id=None):
 
         self.tx_ins = tx_ins
         self.tx_outs = tx_outs
-        self.id = get_transaction_id(self)
+        self.id = tx_id if tx_id else get_transaction_id(self)
+
+def transaction_object(transaction):
+
+    if isinstance(transaction, Transaction):
+        return transaction
+
+    tin_objects = [TxIn(**tin) for tin in transaction['tx_ins']]
+    tout_objects = [TxOut(**tout) for tout in transaction['tx_outs']]
+    return Transaction(tin_objects, tout_objects, transaction['id'])
+
+
+
 
 
 def get_transaction_id(transaction):
@@ -225,6 +237,7 @@ def process_transactions(a_transactions, a_unspent_tx_outs, block_index):
     if not validate_block_transactions(a_transactions, a_unspent_tx_outs, block_index):
         print('invalid block transactions')
         return None
+
     return update_unspent_tx_outs(a_transactions, a_unspent_tx_outs)
 
 

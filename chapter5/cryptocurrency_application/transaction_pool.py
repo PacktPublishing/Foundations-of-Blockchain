@@ -33,7 +33,6 @@ def has_tx_in(tx_in, unspent_tx_outs):
 
 
 def update_transaction_pool(unspent_tx_outs):
-
     global transaction_pool
     for tx in transaction_pool[:]:
         for tx_in in tx.tx_ins:

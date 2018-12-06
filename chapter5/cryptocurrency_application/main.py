@@ -10,7 +10,7 @@ from websockets.exceptions import ConnectionClosed
 from blockchain import Block, Blockchain
 from utils.logger import logger
 from wallet import init_wallet, get_public_from_wallet
-from transaction_pool import add_to_transaction_pool, get_transaction_pool
+from transaction_pool import add_to_transaction_pool, get_transaction_pool, update_transaction_pool
 # from transaction import getU
 
 
@@ -28,7 +28,7 @@ except KeyError as e:
 try:
     initialPeers = os.environ['PEERS'].split(",")
 except Exception as e:
-    initialPeers = ["ws://localhost:3003"]
+    initialPeers = ["ws://localhost:3001"]
 
 
 class Server(object):
@@ -101,7 +101,7 @@ class Server(object):
                 response = {'status': False, 'message': 'failed to create the transaction'}
         except KeyError as e:
             response = {"status": False, "message": "pass value in data key"}
-        # await self.broadcast(self.response_latest_msg())
+        await self.broadcast(self.response_latest_msg())
         return json(response)
 
     async def peers(self, request):
@@ -169,14 +169,13 @@ class Server(object):
     def response_chain_msg(self):
         return {
             'type': RESPONSE_BLOCKCHAIN,
-            'data': JSON.dumps([block.dict() for block in self.blockchain.blocks])
+            'data': JSON.dumps(self.blockchain.blocks, default=lambda o: o.__dict__)
         }
 
     def response_latest_msg(self):
-
         return {
             'type': RESPONSE_BLOCKCHAIN,
-            'data': JSON.dumps([self.blockchain.get_latest_block().dict()])
+            'data': JSON.dumps([self.blockchain.get_latest_block()], default=lambda o: o.__dict__)
         }
 
     def response_transaction_pool_msg(self):
@@ -196,7 +195,8 @@ class Server(object):
             if latest_block_held.hash == latest_block_received["previous_hash"]:
                 logger.info("We can append the received block to our chain")
 
-                self.blockchain.blocks.append(Block(**latest_block_received))
+                self.blockchain.add_block(Block(**latest_block_received))
+
                 await self.broadcast(self.response_latest_msg())
             elif len(received_blocks) == 1:
                 logger.info("We have to query the chain from our peer")
@@ -211,10 +211,14 @@ class Server(object):
 
         try:
 
-            if self.blockchain.is_valid_chain(newBlocks) and len(newBlocks) > len(self.blockchain.blocks):
+            validity_resp = self.blockchain.is_valid_chain(newBlocks)
+
+            if validity_resp and len(newBlocks) > len(self.blockchain.blocks):
                 logger.info('Received blockchain is valid. Replacing current blockchain with '
                             'received blockchain')
                 self.blockchain.blocks = [Block(**block) for block in newBlocks]
+                self.blockchain.set_unspent_tx_outs(validity_resp)
+                update_transaction_pool(self.blockchain.get_unspent_tx_outs())
                 await self.broadcast(self.response_latest_msg())
             else:
                 logger.info('Received blockchain invalid')
@@ -247,7 +251,7 @@ class Server(object):
 
 if __name__ == '__main__':
 
-    server = Server()
     init_wallet()
+    server = Server()
     server.app.add_task(server.connect_to_peers(initialPeers))
     server.app.run(host='0.0.0.0', port=port, debug=True)
