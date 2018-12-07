@@ -12,6 +12,16 @@ PORT=3002 PEERS=ws://localhost:3001 python main.py
 curl -H "Content-type:application/json" --data '{"data" : "Some data to the first block"}' http://localhost:3001/mineBlock
 ```
 
+#### Using docker
+Docker engine and Docker compose installation instructions can be found [here](../prerequisites/docker-installation.md).
+
+(set up three connected nodes and mine a block)
+
+```
+docker-compose up
+```
+
+
 ### HTTP API
 #### Get blockchain
 ```
