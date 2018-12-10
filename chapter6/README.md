@@ -98,6 +98,15 @@ Scripts present here could be used to create and deploy web server to create a R
 
    `python poe_server.py`
    
+#### Using Docker
+
+Docker engine and Docker compose installation instructions can be found [here](../prerequisites/docker-installation.md).
+
+```
+docker build -t poe-server .
+docker run --publish 0.0.0.0:8000:8000 poe-server
+```
+   
 
 ### HTTP API
 ##### Publish document
