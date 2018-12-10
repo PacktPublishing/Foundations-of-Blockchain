@@ -11,7 +11,7 @@ from transaction import Transaction, TxOut, TxIn, get_public_key, get_transactio
 try:
     PRIV_KEY_LOC = os.environ['PRIVATE_KEY']
 except KeyError as e:
-    PRIV_KEY_LOC = 'node/wallet/private_key'
+    PRIV_KEY_LOC = 'private_key'
 
 
 def get_private_from_wallet():
