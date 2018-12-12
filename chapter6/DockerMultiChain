@@ -1,0 +1,18 @@
+FROM python:3.5
+MAINTAINER Channel Cat <channelcat@gmail.com>
+
+ADD . /code
+RUN cd /tmp
+RUN wget https://www.multichain.com/download/multichain-1.0.6.tar.gz
+RUN tar -xvzf multichain-1.0.6.tar.gz
+RUN mv multichain-1.0.6/multichaind multichain-1.0.6/multichain-cli multichain-1.0.6/multichain-util /usr/local/bin
+RUN multichain-util create testchain -default-rpc-port=4416
+RUN cp /code/multichain.conf ~/.multichain/testchain/multichain.conf
+RUN multichaind testchain -daemon && sleep 5 && multichain-cli testchain create stream poe false && multichain-cli testchain subscribe poe
+
+EXPOSE 4416
+
+WORKDIR /code
+
+CMD ["multichaind", "testchain"]
+

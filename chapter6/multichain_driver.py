@@ -1,3 +1,5 @@
+import os
+
 from Savoir import Savoir
 
 
@@ -10,7 +12,11 @@ class MultichainClient(object):
 
         self.rpcuser = kwargs.get('rpcuser', 'multichainrpc')
         self.rpcpasswd = kwargs.get('rpcpasswd', 'HFzmag67bJg2f4YuExgVDqQK5VfnvXRS5SKrByuCgiXm')
-        self.rpchost = kwargs.get('rpchost', 'localhost')
+        try:
+            rpchost = os.environ['RPC_HOST']
+        except Exception as e:
+            rpchost = 'localhost'
+        self.rpchost = kwargs.get('rpchost', rpchost)
         self.rpcport = kwargs.get('rpcport', '4416')
         self.chainname = kwargs.get('chainname', 'testchain')
 

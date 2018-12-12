@@ -1,0 +1,19 @@
+version: '2'
+services:
+  multichain:
+    build:
+      context: ./
+      dockerfile: DockerMultiChain
+    ports:
+    - "4416:4416"
+
+  server:
+    environment:
+      - RPC_HOST=multichain
+    build:
+      context: ./
+      dockerfile: DockerPoeServer
+    ports:
+    - "8000:8000"
+    links:
+      - multichain:multichain

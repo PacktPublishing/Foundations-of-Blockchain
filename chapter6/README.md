@@ -8,7 +8,8 @@ Scripts present here could be used to create and deploy web server to create a R
 
 ### Getting started with MultiChain
 
-- Installation
+- Installation (ubuntu distro)
+    More installation instructions for Mac/Windows/Linux can be found at: www.multichain.com/download-install/
 
     * Change directory to tmp folder: 
     
@@ -34,19 +35,23 @@ Scripts present here could be used to create and deploy web server to create a R
         mv multichaind multichain-cli multichain-util /usr/local/bin
         ``` 
 
-    More installation instructions for Mac/Windows/Linux can be found at: www.multichain.com/download-install/
+    
     
 - Create a chain
     
-    `multichain-util create chain1` 
+    `multichain-util create testchain -default-rpc-port=4416` 
+    
+- Configure multichain node
+
+    Copy the file `./multichain.conf` to `~/.multichain/testchain/` to setup required rpc user and password to communicate from POE server
 
 - Instantiate the chain by creating a process
 
-    `multichaind chain1 –daemon`
+    `multichaind testchain –daemon`
     
 - Check the chain with `getinfo`
 
-    `multichain-cli chain1 getinfo` 
+    `multichain-cli testchain getinfo` 
     
     It should throw the following output
     
@@ -64,7 +69,7 @@ Scripts present here could be used to create and deploy web server to create a R
      
        "chainname": "chain1", 
      
-       "description": "MultiChain chain1", 
+       "description": "MultiChain testchain", 
      
        "protocol": "multichain", 
      
@@ -82,11 +87,15 @@ Scripts present here could be used to create and deploy web server to create a R
     
 - Create a stream
 
-    `create stream stream1 false`
+    `multichain-cli testchain create stream poe false`
+    
+- Subscribe to the stream
+
+    `multichain-cli testchain subscribe poe`
     
 - You should be able to publish stream item if everything went well
 
-    `publish stream1 key1 73747265616d2064617461 `
+    `multichain-cli testchain publish poe key1 73747265616d2064617461 `
     
 ### Deploying the Proof of Existence application     
 
@@ -98,13 +107,17 @@ Scripts present here could be used to create and deploy web server to create a R
 
    `python poe_server.py`
    
-#### Using Docker
+### Using Docker
+
+You can also run the docker containers for both MultiChain node and POE server if you do not want to play around with the commands.
+Windows/Mac users can also run this docker instances.
 
 Docker engine and Docker compose installation instructions can be found [here](../prerequisites/docker-installation.md).
 
+Following command will setup both MultiChain node and the POE server to interact.
 ```
-docker build -t poe-server .
-docker run --publish 0.0.0.0:8000:8000 poe-server
+docker-compose up
+
 ```
    
 
