@@ -9,6 +9,9 @@ Make sure that you have a latest version of `nodejs` and `npm`. Here is a [insta
 
 `npm install ganache-cli web3@0.20.2`
 
+NOTE: Windows users might face dependency issue while installing the ganache-cli. Alternatively, you could also install [ganache](https://truffleframework.com/ganache) for windows.
+
+
 
 #### Install mainnet/testnet blockchain client (Optional)
 
