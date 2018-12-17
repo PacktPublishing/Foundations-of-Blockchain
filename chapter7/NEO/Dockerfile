@@ -6,7 +6,7 @@ RUN apt-get update \
 
   && pip3 install --upgrade pip
 RUN apt-get install -y libleveldb-dev libssl-dev g++
-RUN pip install neo-python
+RUN pip install neo-python==0.6.9
 
 ADD . /code
 
