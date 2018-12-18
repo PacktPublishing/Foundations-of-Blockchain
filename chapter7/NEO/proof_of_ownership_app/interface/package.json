@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@cityofzion/neon-js": "^3.7.3",
+    "@cityofzion/neon-js": "^4.3.1",
+    "rc-progress": "^2.2.6",
+    "react-bootstrap": "^0.32.4",
+    "react-dropzone": "^7.0.1",
     "base-58": "0.0.1",
     "base-64": "^0.1.0",
     "crypto-js": "^3.1.9-1",
