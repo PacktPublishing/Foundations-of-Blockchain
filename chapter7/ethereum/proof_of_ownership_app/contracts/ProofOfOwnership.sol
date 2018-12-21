@@ -11,7 +11,10 @@ contract ProofOfOwnership {
 
     function registerAsset(bytes32 asset) public {
 
+        if (address(assetOwners[asset]) == address(0))
+        {
             assetOwners[asset] = msg.sender;
+        }
 
   }
 
