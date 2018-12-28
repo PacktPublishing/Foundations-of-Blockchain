@@ -18,7 +18,7 @@ class MultichainClient(object):
             rpchost = 'localhost'
         self.rpchost = kwargs.get('rpchost', rpchost)
         self.rpcport = kwargs.get('rpcport', '4416')
-        self.chainname = kwargs.get('chainname', 'testchain')
+        self.chainname = kwargs.get('chainname', 'chain1')
 
     def connect(self):
         """connects to rpc interface"""

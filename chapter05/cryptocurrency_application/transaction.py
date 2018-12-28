@@ -199,6 +199,7 @@ def sign_tx_in(transaction, tx_in_index,
     if referenced_utxo is None:
         print('could not find referenced txOut')
         # throw Error()
+        return False
 
     referenced_address = referenced_utxo.address
 
@@ -206,6 +207,7 @@ def sign_tx_in(transaction, tx_in_index,
         print('trying to sign an input with private' +
               ' key that does not match the address that is referenced in tx_in')
         # throw Error()
+        return False
 
     # key = ec.keyFromPrivate(private_key, 'hex')
     sk = SigningKey.from_string(private_key, curve=SECP256k1)
