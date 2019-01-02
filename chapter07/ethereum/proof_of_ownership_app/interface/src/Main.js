@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone';
 import Web3 from 'web3';
 import getWeb3 from "./utils/getWeb3";
 import { Button, ProgressBar, ButtonToolbar } from 'react-bootstrap';
-import { default as contract } from 'truffle-contract'
+import { default as contract } from 'truffle-contract';
 import contract_artifacts from './contracts/ProofOfOwnership.json';
 import { Line, Circle } from 'rc-progress';
 

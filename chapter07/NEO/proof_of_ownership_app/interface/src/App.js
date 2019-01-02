@@ -148,8 +148,7 @@ class App extends Component {
     }
 
 
-    queryAsset(assetID)
-    {
+    queryAsset(assetID) {
 
 
         console.log(assetID.hexEncode());
