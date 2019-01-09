@@ -1,4 +1,4 @@
-#Chapter 3, Cryptography in Blockchain
+# Chapter 3, Cryptography in Blockchain
 This chapter explains how blockchain technology makes use of few of the cryptographic primitives such as hash functions and digital signatures.
 
 

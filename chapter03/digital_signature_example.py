@@ -12,7 +12,7 @@ class Transaction:
         self.signature = None
         self.public_key = public_key
 
-    def validate(self):
+    def verify(self):
 
         vk = VerifyingKey.from_string(bytes.fromhex(self.public_key), curve=SECP256k1)
 
@@ -54,7 +54,7 @@ print("Generated private key: %s" % account.private_key)
 tx = Transaction(account.public_key)
 tx.sign(account.private_key)
 print("Generated signature: %s" % tx.signature)
-tx.validate()
+tx.verify()
 
 tx.id = '1234'
-tx.validate()
+tx.verify()

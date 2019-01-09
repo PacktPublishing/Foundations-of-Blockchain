@@ -15,4 +15,4 @@ for nonce in range(20):
     hash_data = SHA256.new(input_data.encode()).hexdigest()
 
     # show the input and hash result
-    print((input_data + '=>' + hash_data)[:64] + "...")
+    print(input_data + '=>' + hash_data)
