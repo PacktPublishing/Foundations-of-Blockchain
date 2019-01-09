@@ -39,11 +39,36 @@ https://store.docker.com/editions/community/docker-ce-desktop-windows.
 
 Run the downloaded exe file.
 
-### Quick start
 
-## Docker compose installtion:
+## Docker compose installation:
 
-### Ubuntu:
+### Mac:
+
+Docker for Mac already includes Compose along with other Docker apps. Mac users need not install this separately.
+
+### Windows:
+
+Docker for Windows already includes Compose along with other Docker apps. Windows users need not install this separately.
+
+### Ubuntu/ other Linux platforms
+
+* Download the latest version of Docker Compose:
+
+    ```
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```
+
+* Provide permissions to the executables:
+    ```
+    sudo chmod +x /usr/local/bin/docker-compose
+
+    ``` 
+* Create a symbolic link:
+    ```
+    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+    ```
+ 
 
 
 
