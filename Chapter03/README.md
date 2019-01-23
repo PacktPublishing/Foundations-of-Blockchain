@@ -33,11 +33,17 @@ Find the python package which has the all the functions bundled together.
 
 ### Using script
 
-* ``pip install -r requirements.txt``
+NOTE: Make sure that you are using python 3
 
-* ``python blockchain_example.py``
+* Install the requirements
+   
+    ``pip install -r requirements.txt``
 
-## Hash none example
+* Execute the application
+    
+    ``python blockchain_example.py``
+
+## Hash nonce example
 
 ```python hash_nonce_example.py```
 
