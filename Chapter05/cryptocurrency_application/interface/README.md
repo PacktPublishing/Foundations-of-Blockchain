@@ -1,8 +1,9 @@
 # Interface for the cryptocurrency application
 
 User interface for cryptocurrency application which provides:
-    * [wallet application][./wallet]
-    * [explorer application][./explorer]
+   
+   * [wallet application](./wallet)
+   * [explorer application](./explorer)
 
 ## Credits
 
