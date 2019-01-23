@@ -21,17 +21,17 @@ so that blockchain can be adopted where its implementation actually adds value.
 Chapters and their respective code directories of the book.
 
  1. *Chapter 1*: ***Introduction***
- 2. [*Chapter 2*: ***A Bit of Cryptography***](./chapter02)
- 3. [*Chapter 3*: ***Cryptography in Blockchain***](./chapter03)
- 4. [*Chapter 4*: ***Networking in Blockchain***](./chapter04)
- 5. [*Chapter 5*: ***Cryptocurrency***](./chapter05)
- 6. [*Chapter 6*: ***Diving into Blockchain - Proof of Existence***](./chapter06)
- 7. [*Chapter 7*: ***Diving into Blockchain - Proof of Ownership***](./chapter07)
+ 2. [*Chapter 2*: ***A Bit of Cryptography***](./Chapter02)
+ 3. [*Chapter 3*: ***Cryptography in Blockchain***](./Chapter03)
+ 4. [*Chapter 4*: ***Networking in Blockchain***](./Chapter04)
+ 5. [*Chapter 5*: ***Cryptocurrency***](./Chapter05)
+ 6. [*Chapter 6*: ***Diving into Blockchain - Proof of Existence***](./Chapter06)
+ 7. [*Chapter 7*: ***Diving into Blockchain - Proof of Ownership***](./Chapter07)
  8. *Chapter 8*: ***Blockchain Projects***
  9. *Chapter 9*: ***Blockchain Optimizations and Enhancements***
- 10. [*Chapter 10*: ***Blockchain Security***](./chapter10)
+ 10. [*Chapter 10*: ***Blockchain Security***](./Chapter10)
  11. *Chapter 11*: ***When Shouldn't We Use Blockchain?***
- 12. [*Chapter 12*: ***Blockchain Use Cases***](./chapter12)
+ 12. [*Chapter 12*: ***Blockchain Use Cases***](./Chapter12)
  
 
 
