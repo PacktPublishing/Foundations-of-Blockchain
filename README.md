@@ -1,6 +1,6 @@
 # Foundations of Blockchain
 
-<a href="https://packtpub.com/big-data-and-business-intelligence/foundations-blockchain"><img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/9781789139396_cover.png" alt="Foundations of Blockchain" height="256px" align="right"></a>
+<a href="https://packtpub.com/big-data-and-business-intelligence/foundations-blockchain"><img src="https://www.packtpub.com/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/9/7/9781789139396_cover.png" alt="Foundations of Blockchain" height="256px" align="right"></a>
 
 This is the code repository for [Foundations of Blockchain](https://packtpub.com/big-data-and-business-intelligence/foundations-blockchain), published by [Packt](https://www.packtpub.com). It contains all the supporting project files necessary to work through the book from start to finish.
 
